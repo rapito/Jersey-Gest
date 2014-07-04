@@ -69,4 +69,5 @@ generate this for me.
 * Java 5 SDK 
 * Jersey 1.1.5 <https://github.com/jersey/jersey>
 * JSR 311 
+* Apt Maven Plugin <http://mojo.codehaus.org/apt-maven-plugin/>
 
