@@ -13,9 +13,9 @@ public class TestService
 {
 
     @RestMethod(path = "/helloGest")
-    public static String helloGest(String name)
+    public static String helloGest()
     {
-        return "<xml>Hello " + name + "</xml>";
+        return "<xml>Hello Gest!</xml>";
     }
 
 }
@@ -45,7 +45,7 @@ declaring jersey's operation methods like this:
     @Produces(MediaType.APPLICATION_XML)
     public String helloGestGet()
     {
-        return helloGest();
+        return TestService.helloGest();
     }
 
     @POST
@@ -54,13 +54,10 @@ declaring jersey's operation methods like this:
     @Produces(MediaType.APPLICATION_XML)
     public String helloGestPost()
     {
-        return helloGest();
+        return TestService.helloGest();
     }
     
-    public static void helloGest()
-    {
-      return "Hello Gest!";
-    }
+    
 </pre>
 This was very troublesome so I decided to create my own annotation that would 
 generate this for me.
