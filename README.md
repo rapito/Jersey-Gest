@@ -1,7 +1,7 @@
 Jersey-Gest
 ===========
 
-Java Annotation Extension for Jersey for creating REST/POST Methods
+Jersey Java Annotation Extension for creating REST/POST Methods
 
 A simple utility which allows you to use a single java method to create 
 a GET and a POST Operation Method for **Jersey**.
