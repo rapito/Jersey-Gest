@@ -44,6 +44,7 @@ class RestObject
     String filePath;
     String createPath;
     String servicePath;
+    String packageName;
     List<Method> methods = new ArrayList<Method>();
 
     public void addMethod(String path, String[] queryParams)
@@ -67,7 +68,9 @@ class RestObject
             System.out.println("methodPath: " + m.path);
 
             for (String s : m.queryParams)
+            {
                 System.out.println("\tmethodQueryParams: " + s);
+            }
         }
     }
 }

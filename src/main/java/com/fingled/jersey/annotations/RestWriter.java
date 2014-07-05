@@ -30,8 +30,8 @@ import java.io.*;
 import java.lang.reflect.Method;
 
 /**
- * Handles formatting and I/O for generated class containing
- * resulting Jersey REST Service
+ * Handles formatting and I/O for generated class containing resulting Jersey
+ * REST Service
  *
  * @author Robert Peralta <rapito@gmail.com>
  */
@@ -64,12 +64,20 @@ class RestWriter
         writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
         String className = classNameForFilePath(rest.filePath);
         String classNameToCreate = classNameForFilePath(rest.createPath);
-        classNameToCreate
-                = classNameToCreate.substring(1 + classNameToCreate.lastIndexOf("."));
+        classNameToCreate = classNameToCreate
+                .substring(1 + classNameToCreate.lastIndexOf("."));
         Class c = Class.forName(className);
+        String pkgName = rest.packageName != null && rest.packageName.length() > 0
+                ? "package " + rest.packageName
+                : c.getPackage().toString();
+        pkgName += ";";
+        pkgName = pkgName.replaceAll("\"", "");
+
         writeLine(RestStrings.LICENSE, writer);
         writer.newLine();
-        writeLine(c.getPackage().toString() + ";", writer);
+
+        writeLine(pkgName, writer);
+
         writer.newLine();
         writeLine("import javax.ws.rs.*;", writer);
         writeLine("import javax.ws.rs.core.MediaType;", writer);
@@ -118,7 +126,7 @@ class RestWriter
         Method classMethod = ClassUtil.getMethodAnnotatedWith(
                 c, RestMethod.class, "path", m.path);
 
-        for (int i = 0; m.queryParams!=null && i < m.queryParams.length; i++)
+        for (int i = 0; m.queryParams != null && i < m.queryParams.length; i++)
         {
             String param = m.queryParams[i];
             String attr = param.replaceAll("\"", "");
@@ -129,7 +137,8 @@ class RestWriter
             {
                 invokeParams += attr + ", ";
                 params += paramDecl + ", ";
-            } else
+            }
+            else
             {
                 params += paramDecl;
                 invokeParams += attr;
@@ -199,7 +208,8 @@ class RestWriter
                 if (f.isDirectory())
                 {
                     deleteFolder(f);
-                } else
+                }
+                else
                 {
                     f.delete();
                 }

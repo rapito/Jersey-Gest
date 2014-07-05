@@ -26,9 +26,8 @@ package com.fingled.jersey.annotations;
 import java.lang.annotation.*;
 
 /**
- * Classes annotated with this, will cause a new
- * class(that implements a REST service using jersey)
- * to be automatically generated.
+ * Classes annotated with this, will cause a new class(that implements a REST
+ * service using jersey) to be automatically generated.
  *
  * @author Robert Peralta <rapito@gmail.com>
  */
@@ -43,6 +42,11 @@ public @interface RestClass
      * Jersey Service {@link javax.ws.rs.Path} to be accessed by..
      */
     String path();
+
+    /**
+     * Package name for generated files.
+     */
+    String packageName() default "";
 
     /**
      * <i>.java</i> File to be generated.

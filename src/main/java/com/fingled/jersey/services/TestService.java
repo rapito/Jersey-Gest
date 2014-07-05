@@ -32,15 +32,15 @@ import com.fingled.jersey.annotations.RestMethod;
  *
  * @author Robert Peralta
  */
-@RestClass(path = "/wsdl")
+@RestClass(path = "/wsdl", packageName = "my.services")
 public class TestService
 {
 
     //<editor-fold defaultstate="collapsed" desc="TESTS">
     @RestMethod(path = "/helloGest", queryParams
-            =
-            {
-                "name"
+                =
+                {
+                    "name"
             })
     public static String helloGest(String name)
     {
@@ -54,9 +54,9 @@ public class TestService
     }
 
     @RestMethod(path = "/byeGest", queryParams
-            =
-            {
-                "msg", "name"
+                =
+                {
+                    "msg", "name"
             })
     public static String byeGest(String msg, String name)
     {

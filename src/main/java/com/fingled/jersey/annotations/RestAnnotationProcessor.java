@@ -69,10 +69,14 @@ public class RestAnnotationProcessor implements AnnotationProcessor
                 getDeclarationsAnnotatedWith(methodDeclaration);
 
         for (Declaration d : classDeclarations)
+        {
             processClassDeclaration(d);
+        }
 
         for (Declaration d : methodDeclarations)
+        {
             processMethodDeclaration(d);
+        }
 
         for (Map.Entry<String, RestObject> pair : toGenerate.entrySet())
         {
@@ -84,8 +88,8 @@ public class RestAnnotationProcessor implements AnnotationProcessor
     /**
      * Handles creation of each generated class
      *
-     * @param rest Object containing necessary information to
-     *             generate the class.
+     * @param rest Object containing necessary information to generate the
+     *             class.
      */
     private void processRestObject(RestObject rest)
     {
@@ -103,7 +107,9 @@ public class RestAnnotationProcessor implements AnnotationProcessor
 
             }
             else
+            {
                 filename = rest.createPath.replaceAll("\"", "");
+            }
 
             path += "generated\\";
             rest.createPath = path + filename;
@@ -131,8 +137,8 @@ public class RestAnnotationProcessor implements AnnotationProcessor
     }
 
     /**
-     * Adds a new entry to the RestObject map. If already exists,
-     * adds information of methods which are annotated by any
+     * Adds a new entry to the RestObject map. If already exists, adds
+     * information of methods which are annotated by any
      * <i>RestMethod</i>
      *
      * @param d
@@ -149,9 +155,13 @@ public class RestAnnotationProcessor implements AnnotationProcessor
             RestObject object = toGenerate.get(path);
 
             if (isClass)
+            {
                 addRestClassProperties(object, mirror);
+            }
             else
+            {
                 addRestMethodProperties(object, mirror);
+            }
 
         }
     }
@@ -172,7 +182,9 @@ public class RestAnnotationProcessor implements AnnotationProcessor
                 AnnotationValue value = entry.getValue();
 
                 if (key.getSimpleName().contains("path"))
+                {
                     path = (String) value.getValue();
+                }
                 else if (key.getSimpleName().contains("queryParams"))
                 {
 
@@ -181,13 +193,17 @@ public class RestAnnotationProcessor implements AnnotationProcessor
                     queryParams = new String[list.size()];
                     Iterator it = list.iterator();
                     for (int i = 0; it.hasNext(); i++)
+                    {
                         queryParams[i] = ((AnnotationValue) it.next()).toString();
+                    }
                 }
 
             }
 
             if (path != null)
+            {
                 object.addMethod(path, queryParams);
+            }
         }
     }
 
@@ -209,9 +225,17 @@ public class RestAnnotationProcessor implements AnnotationProcessor
             AnnotationValue value = entry.getValue();
 
             if (key.getSimpleName().contains("compiledName"))
+            {
                 object.createPath = value.toString();
+            }
             else if (key.getSimpleName().contains("path"))
+            {
                 object.servicePath = value.toString();
+            }
+            else if (key.getSimpleName().contains("packageName"))
+            {
+                object.packageName = value.toString();
+            }
 
         }
     }
